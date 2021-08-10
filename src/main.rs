@@ -1,11 +1,17 @@
 use std::env;
-use std::fs;
+use std::process;
 
-#[allow(unused)]
+use grepcli::{Config, run};
+
 fn main() {
-    let content = fs::read_to_string(filename)?;
+    let config = Config::new(env::args()).unwrap_or_else(|err| {
+        eprintln!("Problem parsing arguments: {}", err);
+        process::exit(1);
+    });
 
-    let args = env::args.collect::<&str>();
+    if let Err(e) = run(config) {
+        eprintln!("Application Error: {}", e);
 
-
+        process::exit(1);
+    }
 }
