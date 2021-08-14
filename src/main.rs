@@ -2,8 +2,7 @@ extern crate grepcli;
 
 use std::env;
 use std::process;
-use grepcli::Config;
-use grepcli::run;
+use grepcli::{Config, run};
 
 fn main() {
     let config = Config::new(env::args()).unwrap_or_else(|err| {
