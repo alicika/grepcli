@@ -32,7 +32,7 @@ impl Config {
     }
 }
 
-pub fn run(config: Config) -> Result<(), Apperror> {
+pub fn run(config: Config) -> Result<(), AppError> {
     let mut f = File::open(config.filename)?;
 
     let mut contents = String::new();
