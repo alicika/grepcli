@@ -2,7 +2,7 @@ use std::io;
 use std::fmt;
 use std::error::Error;
 
-#[derive(Error)]
+#[derive(Debug)]
 pub enum AppError {
     MissingQuery,
     MissingFilename,
@@ -16,7 +16,22 @@ impl fmt::Display for AppError {
         match self {
             Self::MissingQuery => f.write_str("No query string"),
             Self::MissingFilename => f.write_str("No file name"),
-            Self::ConfigLoad { error } => write!(f, "Error state: {}", source),
+            Self::ConfigLoad { error } => write!(f, "Error state: {}", error),
         }
+    }
+}
+
+impl Error for AppError {
+    fn source(&self) -> Option<&(dyn Error + 'static)> {
+        match self {
+            Self::ConfigLoad { error } => Some(error),
+            _ => None,
+        }
+    }
+}
+
+impl From<io::Error> for AppError {
+    fn from(error: io::Error) -> Self {
+        Self::ConfigLoad { error }
     }
 }
