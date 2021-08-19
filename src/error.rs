@@ -1,6 +1,5 @@
 use std::io;
 use std::fmt;
-use std::error::Error;
 
 #[derive(Debug)]
 pub enum AppError {
@@ -21,8 +20,8 @@ impl fmt::Display for AppError {
     }
 }
 
-impl Error for AppError {
-    fn source(&self) -> Option<&(dyn Error + 'static)> {
+impl std::error::Error for AppError {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
         match self {
             Self::ConfigLoad { error } => Some(error),
             _ => None,
