@@ -1,6 +1,7 @@
 name: get diff and test
 
-on: [push]
+on: [push, pull_request]
+  branches: main
 
 jobs:
   getdiffandtest:
