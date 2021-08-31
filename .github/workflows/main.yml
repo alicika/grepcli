@@ -1,5 +1,5 @@
 name: get diff and test
-
+on:
   push:
     branches: main
   pull_request:
