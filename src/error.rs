@@ -1,13 +1,11 @@
-use std::io;
 use std::fmt;
+use std::io;
 
 #[derive(Debug)]
 pub enum AppError {
     MissingQuery,
     MissingFilename,
-    ConfigLoad {
-        error: io::Error,
-    }
+    ConfigLoad { error: io::Error },
 }
 
 impl fmt::Display for AppError {

@@ -1,6 +1,6 @@
+use std::env;
 use std::fs::File;
 use std::io::prelude::*;
-use std::env;
 
 mod error;
 use error::AppError;
@@ -27,7 +27,11 @@ impl Config {
 
         let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
 
-        Ok(Config { query, filename, case_sensitive })
+        Ok(Config {
+            query,
+            filename,
+            case_sensitive,
+        })
     }
 }
 
@@ -51,7 +55,8 @@ pub fn run(config: Config) -> Result<(), AppError> {
 }
 
 fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    contents.lines()
+    contents
+        .lines()
         .filter(|line| line.contains(query))
         .collect()
 }
