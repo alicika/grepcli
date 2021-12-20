@@ -3,7 +3,7 @@ name: Publish
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
   build:
@@ -20,8 +20,8 @@ jobs:
           # A personal access token for the GitHub repository in which the release will be created and edited.
           # It is recommended to create the access token with the following scopes: `repo, user, admin:repo_hook`.
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/release/glepcli
-          asset_name: glepcli
+          file: target/release/grepcli
+          asset_name: grepcli
           tag: ${{ github.ref }}
           overwrite: true
           body: "This is my release text"
